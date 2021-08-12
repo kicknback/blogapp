@@ -5,6 +5,9 @@ export default function PostIndex(props) {
         </header>
         <main>
             <div>
+                
+            </div>
+            <div>
                 ${props.posts.map(post => `<h3>${post.title}</h3>`).join('')}   
             </div>
         </main>

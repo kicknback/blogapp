@@ -5,6 +5,8 @@ target/
 !**/src/test/**/target/
 src/main/resources/curriculum
 src/main/resources/application.properties
+scratchpad.html
+
 
 ### STS ###
 .apt_generated
