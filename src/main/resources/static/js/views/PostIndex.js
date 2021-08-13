@@ -22,41 +22,48 @@ export default function PostIndex(props) {
                 <button type="submit" class="btn btn-primary" id="submit">Submit</button>
 
             </form>
-            
+            <br>
             <div>
-                ${props.posts.map(post => `<h3>${post.title}</h3>`).join('')}   
+                ${props.posts.map(post => `<h3 class="post-title" data-id="${post.id}">${post.title}</h3>`).join('')}   
             </div>
         </main>
     `;
 }
 
-// Sends the post form data to the backend postscontroller; then empties the form fields
-$("#submit").click(function() {
-    let pId = $("#postid").val().trim();
-    let pTitle = $("#post-title").val().trim();
-    let pContent = $("#post-content").val();
-    let postObj = {
-        id: pId,
-        title: pTitle,
-        content: pContent
-    };
 
-    fetch("http://localhost:8080/api/posts",{
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(postObj)
-    }).then(res => res.json()).then(data => {
-        console.log(data);
-        pId.val("");
-        pTitle.val("");
-        pContent.val("");
+/*Sends the post form data to the backend postscontroller; then empties the form fields*/
+export function postListener() {
 
-    }).catch(err => {
-        console.log(`There was an API error of the following: ${err}`);
-        alert(`Sorry, there was an error adding the post ${pTitle}.  Please try again later.`)
-    });
+    $("#submit").click(function () {
+        let pId = $("#postid").val().trim();
+        let pTitle = $("#post-title").val().trim();
+        let pContent = $("#post-content").val();
+        let postObj = {
+            id: pId,
+            title: pTitle,
+            content: pContent
+        };
+        console.log(pId);
+        console.log(pTitle);
+        console.log(pContent);
+        console.log(postObj);
 
+        fetch("http://localhost:8080/api/posts", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(postObj)
+        }).then(res => res.json()).then(data => {
+            console.log(data);
+            pId.val("");
+            pTitle.val("");
+            pContent.val("");
 
-})
+        }).catch(err => {
+            console.log(`There was an API error of the following: ${err}`);
+            alert(`Sorry, there was an error adding the post ${pTitle}.  Please try again later.`)
+        });
+
+    })
+}

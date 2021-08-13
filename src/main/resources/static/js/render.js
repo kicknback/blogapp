@@ -10,7 +10,11 @@ export default function render(props, route) {
     const title = `REST Blog - ${route.title}`;
     history.pushState(props, title, route.uri);
     document.title = title;
+
+    // Add to the DOM
     app.innerHTML = `${Navbar(null)} ${route.returnView(props)}`;
+
+    // Add event listeners AFTER DOM loaded
     if (route.viewEvent){
         route.viewEvent();
     }
