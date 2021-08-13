@@ -10,13 +10,21 @@ import java.util.List;
 @RequestMapping(value = "/api/posts", headers = "Accept=application/json")
 public class PostsController {
 
-    @GetMapping
-    private List<Post> getPosts() {
-        return new ArrayList<Post>(){{
+    private ArrayList<Post> posts;
+
+    PostsController() {
+
+        posts = new ArrayList<Post>() {{
             add(new Post(1L, "A new post", "this is a brilliant post. 10/10"));
             add(new Post(2L, "A newer post", "this is a slightly brilliant post. 10/10"));
             add(new Post(3L, "A new post", "this is a supremely brilliant post. 10/10"));
         }};
+
+    }
+
+    @GetMapping
+    private List<Post> getPosts() {
+        return posts;
     }
 
 //    @GetMapping("{id}")
@@ -31,6 +39,9 @@ public class PostsController {
 
     @PostMapping
     private void createPost(@RequestBody Post newPost) {
+        int id = posts.size() + 1;
+        newPost.setId((long) id);
+        posts.add(newPost);
         System.out.println(newPost.getTitle());
         System.out.println(newPost.getContent());
     }

@@ -1,3 +1,6 @@
+import fetchData from "../fetchData.js";
+import createView from "../createView.js";
+
 export default function PostIndex(props) {
     return `
         <header>
@@ -7,10 +10,6 @@ export default function PostIndex(props) {
             
             <form>
 
-                <div class="form-group">
-                    <label for="postid">Post ID</label>
-                    <input type="text" class="form-control" id="postid" placeholder="(Enter number)">
-                </div>
                 <div class="form-group">
                     <label for="post-title">Title</label>
                     <input type="text" class="form-control" id="post-title" placeholder="'Very cool blog'...">
@@ -24,8 +23,20 @@ export default function PostIndex(props) {
             </form>
             <br>
             <div>
-                ${props.posts.map(post => `<h3 class="post-title" data-id="${post.id}">${post.title}</h3>`).join('')}   
+            ${props.posts.map(post =>
+            `
+            <div class="card" data-id="${post.id}" >
+                <div class="card-header">
+                    ${post.title}
+                </div>
+                <div class="card-body">
+                    <p class="card-text">${post.content}</p>
+                    <a href="#" class="btn btn-primary edit">Edit</a>
+                    <a href="#" class="btn btn-primary delete">Delete</a>
+                </div>
             </div>
+            `).join('')}
+        </div>
         </main>
     `;
 }
@@ -35,18 +46,13 @@ export default function PostIndex(props) {
 export function postListener() {
 
     $("#submit").click(function () {
-        let pId = $("#postid").val().trim();
+        // let pId = $("#postid").val().trim();
         let pTitle = $("#post-title").val().trim();
         let pContent = $("#post-content").val();
         let postObj = {
-            id: pId,
             title: pTitle,
             content: pContent
         };
-        console.log(pId);
-        console.log(pTitle);
-        console.log(pContent);
-        console.log(postObj);
 
         fetch("http://localhost:8080/api/posts", {
             method: "POST",
@@ -54,11 +60,11 @@ export function postListener() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(postObj)
-        }).then(res => res.json()).then(data => {
+        }).then(data => {
             console.log(data);
-            pId.val("");
-            pTitle.val("");
-            pContent.val("");
+            createView("/posts");
+            pTitle = "";
+            pContent = "";
 
         }).catch(err => {
             console.log(`There was an API error of the following: ${err}`);
@@ -66,4 +72,24 @@ export function postListener() {
         });
 
     })
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
