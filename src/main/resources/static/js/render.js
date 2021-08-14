@@ -12,7 +12,7 @@ export default function render(props, route) {
     document.title = title;
 
     // Add to the DOM
-    app.innerHTML = `${Navbar(null)} ${route.returnView(props)}`;
+    app.innerHTML = `${Navbar(null)} ${route.returnView(props)} `;
 
     // Add event listeners AFTER DOM loaded
     if (route.viewEvent){

@@ -18,25 +18,64 @@ export default function PostIndex(props) {
                     <label for="post-content">Content</label>
                     <textarea class="form-control" id="post-content" rows="3"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                <button type="submit" class="myButton" id="submit">Submit</button>
 
             </form>
             <br>
             <div>
+            
+                
             ${props.posts.map(post =>
-            `
-            <div class="card" data-id="${post.id}" >
-                <div class="card-header">
-                    ${post.title}
+        `
+                <div class="card" data-id="${post.id}" >
+                    <div class="card-header">
+                        ${post.title}
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">${post.content}</p>
+                        <button type="button" class="myButton edit" data-toggle="modal" data-target="#ModalCenter">Edit</button>
+                        <button type="button" class="myButton delete">Delete</button>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p class="card-text">${post.content}</p>
-                    <a href="#" class="btn btn-primary edit">Edit</a>
-                    <a href="#" class="btn btn-primary delete">Delete</a>
+            `).join('')}
+            
+                <div class="modal fade" id="ModalCenter" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                 role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ModalLongTitle">Edit post</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <form>
+                                <div class="form-group">
+                                    <label for="p-title">Post Title</label>
+                                    <input type="text" class="form-control" id="p-title" placeholder="">
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="p-content">Post Content</label>
+                                    <input type="text" class="form-control" id="p-content" aria-describedby="textHelp"
+                                           placeholder="">
+                                    <!--                            <small id="textHelp" class="form-text text-muted"></small>-->
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="myButton" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="myButton" id="add-movie" data-dismiss="modal">Edit Post
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            `).join('')}
-        </div>
+            
+            </div>
         </main>
     `;
 }
@@ -72,9 +111,12 @@ export function postListener() {
         });
 
     })
-    $(".edit").click(function (){
+    $(".edit").click(function () {
         console.log("Edit event fired..");
-
+        let postId = $(this).parent().parent().attr("data-id");
+        let postTitle = $(this).parent().siblings(".card-header").text();
+        console.log(postId);
+        console.log(postTitle);
 
     })
 
