@@ -72,7 +72,11 @@ export function postListener() {
         });
 
     })
+    $(".edit").click(function (){
+        console.log("Edit event fired..");
 
+
+    })
 
 }
 
