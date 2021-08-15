@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping(value = "/api/posts", headers = "Accept=application/json")
@@ -48,14 +49,20 @@ public class PostsController {
 
     @PutMapping("/{id}")
     private void updatePost(@PathVariable Long id, @RequestBody Post post) {
+        System.out.println(post.getId());
         System.out.println(post.getTitle());
         System.out.println(post.getContent());
-        System.out.println(post.getId());
-//        posts.
+        for (Post postItem : posts) {
+            if (Objects.equals(postItem.getId(), id)) {
+                postItem.setTitle(post.getTitle());
+                postItem.setContent(post.getContent());
+            }
+        }
     }
 
     @DeleteMapping("/{id}")
     private void deletePost(@PathVariable Long id) {
+        posts.removeIf(postItem -> Objects.equals(postItem.getId(), id));
         System.out.printf("Movie %s was deleted.", id);
     }
 

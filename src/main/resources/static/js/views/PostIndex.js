@@ -83,7 +83,7 @@ export default function PostIndex(props) {
 /*Sends the post form data to the backend postscontroller; then empties the form fields*/
 export function postListener() {
 
-    $("#submit").click(function () {
+    $("#submit").click(function() {
         // let pId = $("#postid").val().trim();
         let pTitle = $("#post-title").val().trim();
         let pContent = $("#post-content").val();
@@ -111,7 +111,7 @@ export function postListener() {
 
     })
 
-    $(".edit").click(function () {
+    $(".edit").click(function() {
         console.log("Edit event fired..");
         let postId = $(this).parent().parent().attr("data-id");
         let postTitle = $(this).parent().siblings(".card-header").text().trim();
@@ -134,16 +134,40 @@ export function postListener() {
                 type: "PUT",
                 contentType: "application/json",
                 data: putObj,
-                dataType: "json",
                 success: function (result) {
                     console.log(result);
+                    createView("/posts");
                 },
                 error: function (result) {
-                    console.log("There was an issue changing the post");
+                    console.log("Caught error for ajax call");
                     console.log(result);
                     alert("There was an issue changing the post.  Please try again later.")
                 }
             })
+        })
+    })
+
+    $(".delete").click(function() {
+        let postId = $(this).parent().parent().attr("data-id");
+        let idObj = {
+            id: postId
+        }
+        idObj = JSON.stringify(idObj);
+
+        $.ajax({
+            url: `http://localhost:8080/api/posts/${postId}`,
+            type: "DELETE",
+            contentType: "application/json",
+            data: idObj,
+            success: function (result) {
+                console.log(result);
+                createView("/posts");
+            },
+            error: function (result) {
+                console.log("Caught error for ajax delete call");
+                console.log(result);
+                createView("/error");
+            }
         })
     })
 
