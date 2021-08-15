@@ -59,16 +59,15 @@ export default function PostIndex(props) {
                                 </div>
                                 <div class="form-group">
                                     <label for="p-content">Post Content</label>
-                                    <input type="text" class="form-control" id="p-content" aria-describedby="textHelp"
-                                           placeholder="">
-                                    <!--                            <small id="textHelp" class="form-text text-muted"></small>-->
+                                    <textarea class="form-control" id="p-content" rows="3" placeholder=""></textarea>
+                                    <!--   <small id="textHelp" class="form-text text-muted"></small>-->
                                 </div>
 
                             </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="myButton" data-dismiss="modal">Cancel</button>
-                            <button type="button" class="myButton" id="add-movie" data-dismiss="modal">Edit Post
+                            <button type="button" class="myButton" id="edit-post" data-dismiss="modal">Edit Post
                             </button>
                         </div>
                     </div>
@@ -111,13 +110,41 @@ export function postListener() {
         });
 
     })
+
     $(".edit").click(function () {
         console.log("Edit event fired..");
         let postId = $(this).parent().parent().attr("data-id");
-        let postTitle = $(this).parent().siblings(".card-header").text();
-        console.log(postId);
-        console.log(postTitle);
+        let postTitle = $(this).parent().siblings(".card-header").text().trim();
+        let postContent = $(this).parent().children(".card-text").text().trim();
+        let modalTitle = $("#p-title");
+        let modalContent = $("#p-content");
+        modalTitle.val(postTitle);
+        modalContent.val(postContent);
 
+        $("#edit-post").click(function () {
+            let putObj = {
+                id: postId,
+                title: modalTitle.val(),
+                content: modalContent.val()
+            }
+            putObj = JSON.stringify(putObj);
+
+            $.ajax({
+                url: `http://localhost:8080/api/posts/${postId}`,
+                type: "PUT",
+                contentType: "application/json",
+                data: putObj,
+                dataType: "json",
+                success: function (result) {
+                    console.log(result);
+                },
+                error: function (result) {
+                    console.log("There was an issue changing the post");
+                    console.log(result);
+                    alert("There was an issue changing the post.  Please try again later.")
+                }
+            })
+        })
     })
 
 }

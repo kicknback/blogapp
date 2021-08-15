@@ -46,14 +46,15 @@ public class PostsController {
         System.out.println(newPost.getContent());
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     private void updatePost(@PathVariable Long id, @RequestBody Post post) {
         System.out.println(post.getTitle());
         System.out.println(post.getContent());
-        System.out.println(id);
+        System.out.println(post.getId());
+//        posts.
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     private void deletePost(@PathVariable Long id) {
         System.out.printf("Movie %s was deleted.", id);
     }
