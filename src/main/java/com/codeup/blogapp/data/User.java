@@ -19,6 +19,10 @@ public class User {
         this.createdAt = createdAt;
     }
 
+    public User(String username) {
+        this.username = username;
+    }
+
     public User() {
     }
 

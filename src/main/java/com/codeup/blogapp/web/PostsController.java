@@ -28,15 +28,6 @@ public class PostsController {
         return posts;
     }
 
-//    @GetMapping("{id}")
-//    private Post getPostById(@PathVariable Long id) {
-//        // /api/posts/1
-//        if (id == 1) {
-//            return new Post(1L, "A new post", "this is a brilliant post. 10/10");
-//        } else {
-//            return null;
-//        }
-//    }
 
     @PostMapping
     private void createPost(@RequestBody Post newPost) {
