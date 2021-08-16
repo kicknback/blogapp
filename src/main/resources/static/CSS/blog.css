@@ -2,9 +2,10 @@
 /*    margin-bottom: 150px;*/
 /*}*/
 
-header {
+header, #login-heading, #register-heading{
     margin-top: 100px;
 }
+
 
 
 /*Styling for the buttons*/

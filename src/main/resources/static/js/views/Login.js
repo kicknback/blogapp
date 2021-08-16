@@ -1,12 +1,12 @@
 export default function Login(props) {
     return `<!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8"/>
         <title>Log In</title>
     </head>
     <body>
-        <h1>Log In</h1>
+        <h1 id="login-heading">Log In</h1>
     
         <form id="login-form">
             <label for="username">Username</label>
