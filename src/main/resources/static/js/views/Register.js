@@ -29,6 +29,8 @@ export default function Register(props) {
 </html>`;
 }
 
-export function userListener() {
+export function registerListener() {
+    $("#submit-user").click(function() {
 
+    })
 }
