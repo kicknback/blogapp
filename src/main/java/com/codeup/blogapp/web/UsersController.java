@@ -17,9 +17,9 @@ public class UsersController {
     UsersController() {
 
         users = new ArrayList<User>() {{
-            add(new User(1, "JoBo", "jobo@gmail.com", "jobojobo", User.Role.ADMIN));
-            add(new User(2, "Danika", "danika@gmail.com", "blahblahblah", User.Role.USER));
-            add(new User(3, "Tonga", "tonga@hotmail.com", "20inva[sh20h", User.Role.USER));
+            add(new User(1, "JoBo", "jobo@gmail.com", "jobojobo"));
+            add(new User(2, "Danika", "danika@gmail.com", "blahblahblah"));
+            add(new User(3, "Tonga", "tonga@hotmail.com", "20inva[sh20h"));
         }};
 
     }
@@ -31,7 +31,6 @@ public class UsersController {
     private void createUser(@RequestBody User user) {
         int id = users.size() + 1;
         user.setId((long) id);
-        user.setRole(User.Role.USER);
         users.add(user);
         System.out.println(user.getUsername());
         System.out.println(user.getEmail());

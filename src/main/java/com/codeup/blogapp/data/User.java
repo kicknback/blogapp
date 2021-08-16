@@ -8,15 +8,14 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private Role role;
+    private Role role = Role.USER;
     public enum Role {USER, ADMIN}
 
-    public User(long id, String username, String email, String password, Role role) {
+    public User(long id, String username, String email, String password) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.role = role;
     }
 
     public User(String username) {
