@@ -6,7 +6,7 @@ export default function PostIndex(props) {
         <header>
             <h1>Posts Page</h1>
         </header>
-        <main>
+        <main class="">
             
             <form>
 
@@ -23,8 +23,9 @@ export default function PostIndex(props) {
             </form>
             <br>
             <div>
-            
-                
+            <hr>
+            <br>  
+            <h2 class="align-self-center">POSTS</h2>
             ${props.posts.map(post =>
         `
                 <div class="card" data-id="${post.id}" >
@@ -83,7 +84,7 @@ export default function PostIndex(props) {
 /*Sends the post form data to the backend postscontroller; then empties the form fields*/
 export function postListener() {
 
-    $("#submit").click(function() {
+    $("#submit").click(function () {
         // let pId = $("#postid").val().trim();
         let pTitle = $("#post-title").val().trim();
         let pContent = $("#post-content").val();
@@ -111,7 +112,7 @@ export function postListener() {
 
     })
 
-    $(".edit").click(function() {
+    $(".edit").click(function () {
         console.log("Edit event fired..");
         let postId = $(this).parent().parent().attr("data-id");
         let postTitle = $(this).parent().siblings(".card-header").text().trim();
@@ -147,7 +148,7 @@ export function postListener() {
         })
     })
 
-    $(".delete").click(function() {
+    $(".delete").click(function () {
         let postId = $(this).parent().parent().attr("data-id");
         let idObj = {
             id: postId

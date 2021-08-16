@@ -1,3 +1,13 @@
+/*.navbar {*/
+/*    margin-bottom: 150px;*/
+/*}*/
+
+header {
+    margin-top: 100px;
+}
+
+
+/*Styling for the buttons*/
 .myButton {
     box-shadow:inset 0px 1px 0px -2px #ffffff;
     background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
