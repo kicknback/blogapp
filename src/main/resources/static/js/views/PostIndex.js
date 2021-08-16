@@ -1,4 +1,3 @@
-import fetchData from "../fetchData.js";
 import createView from "../createView.js";
 
 export default function PostIndex(props) {

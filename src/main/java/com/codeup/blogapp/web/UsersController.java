@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping(value = "/api/users", headers = "Accept=application/json")
+@RequestMapping(value = "/api/users", headers = "Accept=application/json", produces = "application/json")
 public class UsersController {
 
     private ArrayList<User> users;
@@ -29,7 +29,12 @@ public class UsersController {
 
     @PostMapping
     private void createUser(@RequestBody User user) {
+        int id = users.size() + 1;
+        user.setId((long) id);
+        user.setRole(User.Role.USER);
+        users.add(user);
         System.out.println(user.getUsername());
+        System.out.println(user.getEmail());
     }
 
     @PutMapping("/{id}")
