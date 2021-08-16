@@ -16,9 +16,9 @@ public class UsersController {
     UsersController() {
 
         users = new ArrayList<User>() {{
-            add(new User("JoBo"));
-            add(new User("Danika"));
-            add(new User("Tonga"));
+            add(new User(1, "JoBo", "jobo@gmail.com", "jobojobo"));
+            add(new User(2, "Danika", "danika@gmail.com", "blahblahblah"));
+            add(new User(3, "Tonga", "tonga@hotmail.com", "20inva[sh20h"));
         }};
 
     }
