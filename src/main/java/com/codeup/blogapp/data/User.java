@@ -4,17 +4,19 @@ import java.util.Date;
 
 public class User {
 
-    public enum Role {USER, ADMIN};
     private long id;
     private String username;
     private String email;
     private String password;
+    private Role role;
+    public enum Role {USER, ADMIN}
 
-    public User(long id, String username, String email, String password) {
+    public User(long id, String username, String email, String password, Role role) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     public User(String username) {
@@ -54,5 +56,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
