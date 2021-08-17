@@ -15,6 +15,9 @@ import java.util.Objects;
 public class UsersController {
 
     private ArrayList<User> users;
+    List<Post> posts = new ArrayList<>(){{
+
+    }};
 
     UsersController() {
 
