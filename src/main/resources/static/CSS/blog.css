@@ -8,7 +8,7 @@ header, #login-heading, #register-heading, #user-heading{
 
 
 
-/*Styling for the buttons*/
+/*    Styling for the buttons -- created from https://www.bestcssbuttongenerator.com/    */
 .myButton {
     box-shadow:inset 0px 1px 0px -2px #ffffff;
     background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);

@@ -24,5 +24,16 @@ export default function User(props) {
 </html>`;
 }
 
-
+export function searchUser() {
+    $("#submit-search").click(function() {
+        let uName = $("#username-search");
+        if (uName.val() === "") {
+            alert("Please enter a username to search");
+        }
+        $.get(`http://localhost:8080/api/users/findByUsername?username=${uName.val()}`, function (data, status) {
+            console.log(data);
+            console.log(status);
+        })
+    })
+}
 
