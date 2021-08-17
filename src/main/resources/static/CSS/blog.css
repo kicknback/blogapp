@@ -6,6 +6,10 @@ header, #login-heading, #register-heading, #user-heading{
     margin-top: 100px;
 }
 
+.user-card {
+    background-clip: border-box;
+    border: 1px solid #d2d2dc;
+}
 
 
 /*    Styling for the buttons -- created from https://www.bestcssbuttongenerator.com/    */
@@ -33,3 +37,4 @@ header, #login-heading, #register-heading, #user-heading{
     position:relative;
     top:1px;
 }
+/*----------------------------------------------------*/
