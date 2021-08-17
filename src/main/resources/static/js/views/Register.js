@@ -26,7 +26,7 @@ export default function Register(props) {
                 </div>
                 <button type="submit" class="myButton" id="submit-user">Submit</button>
 
-            </form>
+        </form>
     </body>
 </html>`;
 }
