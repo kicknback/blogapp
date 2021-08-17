@@ -16,7 +16,7 @@ public class UsersController {
 
     private ArrayList<User> users;
 
-
+    User testUser = new User(4L, "testy", "testy@test.com", "testytest");
 
     UsersController() {
 
@@ -24,6 +24,7 @@ public class UsersController {
             add(new User(1, "JoBo", "jobo@gmail.com", "jobojobo"));
             add(new User(2, "Danika", "danika@gmail.com", "blahblahblah"));
             add(new User(3, "Tonga", "tonga@hotmail.com", "20inva[sh20h"));
+            add(testUser);
         }};
 
     }
