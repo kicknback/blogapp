@@ -6,17 +6,20 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/api/users", headers = "Accept=application/json", produces = "application/json")
 public class UsersController {
 
     private ArrayList<User> users;
+    Collection<Post> posts = new ArrayList<Post>() {{
+        add(new Post(1L, "A new post", "this is a brilliant post. 10/10"));
+        add(new Post(2L, "A newer post", "this is a slightly brilliant post. 10/10"));
+        add(new Post(3L, "A new post", "this is a supremely brilliant post. 10/10"));
+    }};
 
-    User testUser = new User(4L, "testy", "testy@test.com", "testytest");
+    User testUser = new User(4L, "testy", "testy@test.com", "testytest", posts);
 
     UsersController() {
 

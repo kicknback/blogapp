@@ -55,7 +55,7 @@ export function searchUser() {
                     <div class="col-md-5">
                         <div class="card user-card">
                             <div class="card-body text-center">
-                                <div> <img src="https://img.icons8.com/bubbles/100/000000/administrator-male.png" class="img-lg rounded-circle mb-4" alt="profile image">
+                                <div> <img src="https://img.icons8.com/windows/32/000000/anonymous-mask.png" class="img-lg rounded-circle mb-4" alt="profile image">
                                     <h4>${data.username}</h4>
                                 </div>
                                 <p class="mt-2 card-text">- Bio goes here -</p> <button class="myButton mb-4 mt-2">Change password</button>
@@ -110,7 +110,6 @@ export function searchUser() {
         })
     })
 }
-
 
 
 

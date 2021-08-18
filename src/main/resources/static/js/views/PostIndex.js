@@ -26,10 +26,11 @@ export default function PostIndex(props) {
             <br>  
             <h2 class="align-self-center">POSTS</h2>
             ${props.posts.map(post =>
-        `
+                
+                `
                 <div class="card" data-id="${post.id}" >
-                    <div class="card-header">
-                        ${post.title}
+                    <div class="card-header d-flex justify-content-between">
+                        <p>${post.title}</p><p>by: ${post.user.username}</p>
                     </div>
                     <div class="card-body">
                         <p class="card-text">${post.content}</p>
@@ -37,7 +38,7 @@ export default function PostIndex(props) {
                         <button type="button" class="myButton delete">Delete</button>
                     </div>
                 </div>
-            `).join('')}
+                `).join('')}
             
                 <div class="modal fade" id="ModalCenter" data-backdrop="static" data-keyboard="false" tabindex="-1"
                  role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
@@ -89,7 +90,10 @@ export function postListener() {
         let pContent = $("#post-content").val();
         let postObj = {
             title: pTitle,
-            content: pContent
+            content: pContent,
+            user: {
+                username: "jobo"
+            }
         };
 
         fetch("http://localhost:8080/api/posts", {

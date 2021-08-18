@@ -13,14 +13,14 @@ import java.util.Objects;
 public class PostsController {
 
     private ArrayList<Post> posts;
-    User user = new User(4L, "testy", "testy@test.com", "testytest");
+    User testUser = new User(4L, "testy", "testy@test.com", "testytest");
 
     PostsController() {
 
         posts = new ArrayList<Post>() {{
-            add(new Post(1L, "A new post", "this is a brilliant post. 10/10", user));
-            add(new Post(2L, "A newer post", "this is a slightly brilliant post. 10/10", user));
-            add(new Post(3L, "A new post", "this is a supremely brilliant post. 10/10", user));
+            add(new Post(1L, "A new post", "this is a brilliant post. 10/10", testUser));
+            add(new Post(2L, "A newer post", "this is a slightly brilliant post. 10/10", testUser));
+            add(new Post(3L, "A new post", "this is a supremely brilliant post. 10/10", testUser));
         }};
 
     }
