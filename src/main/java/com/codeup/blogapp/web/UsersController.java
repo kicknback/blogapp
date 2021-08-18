@@ -91,9 +91,12 @@ public class UsersController {
     private void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword, @Valid @Size(min = 3) @RequestParam String newPassword) {
         for (User userItem : users) {
             if (Objects.equals(userItem.getId(), id)) {
-                if (Objects.equals(userItem.getPassword(), oldPassword))
+                if (Objects.equals(userItem.getPassword(), oldPassword)) {
                     userItem.setPassword(newPassword);
-                System.out.println("Password was changed...");
+                    System.out.println("Password was changed...");
+                } else {
+                    System.out.println("Password change denied...");
+                }
             }
         }
     }

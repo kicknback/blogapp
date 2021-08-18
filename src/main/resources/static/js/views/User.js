@@ -1,5 +1,6 @@
 import createView from "../createView.js";
 
+
 export default function User(props) {
     return `<!DOCTYPE html>
 <html lang="en">
@@ -26,6 +27,8 @@ export default function User(props) {
 
 /*Searches database for the input string.  Returns user info card, with posts(if existing).  If no user found, returns message stating so.*/
 export function searchUser() {
+    let userInformationId;
+
     $("#submit-search").click(function() {
         let uName = $("#username-search").val();
         let uDiv = $("#user-container");
@@ -45,6 +48,7 @@ export function searchUser() {
                 `)
                 return;
             }
+            userInformationId = data.id;  // if user is found, sets the user id for use in the change password listener below
             uDiv.append(`
             
         <!-- user card powered by bbbootstrap snippets-->
@@ -58,8 +62,19 @@ export function searchUser() {
                                 <div> <img src="https://img.icons8.com/windows/32/000000/anonymous-mask.png" class="img-lg rounded-circle mb-4" alt="profile image">
                                     <h4>${data.username}</h4>
                                 </div>
-                                <p class="mt-2 card-text">- Bio goes here -</p> <button class="myButton mb-4 mt-2">Change password</button>
-                                <div class="border-top pt-3">
+                                <p class="mt-2 card-text">- Bio goes here -</p> <button class="myButton mb-4 mt-2" id="pass-button" type="button" data-toggle="collapse" data-target="#pass-collapse" aria-expanded="false" aria-controls="pass-collapse">Change password</button>
+                                <form class="collapse" id="pass-collapse">
+                                    <div class="form-group">
+                                        <label for="old-pass">Old password</label>
+                                        <input type="password" class="form-control" id="old-pass">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="new-pass">New password</label>
+                                        <input type="password" class="form-control" id="new-pass">
+                                    </div>
+                                    <button type="submit" class="myButton mb-2" id="submit-new-pass">Change</button>
+                                </form>
+                                <div class="border-top pt-3 mt-1">
                                     <div class="" id="user-posts-div">
                                         <div class="">
                                             <h6>EMAIL</h6>
@@ -85,7 +100,7 @@ export function searchUser() {
                     
                     ${data.posts.map(post =>
                     `
-                <div class="card" data-id="${post.id}" >
+                <div class="card mb-2" data-id="${post.id}" >
                     <div class="card-header">
                         ${post.title}
                     </div>
@@ -108,8 +123,24 @@ export function searchUser() {
                 `)
             }
         })
+
+        $("#pass-button").click(function() {
+            let oldPass = $("#old-pass").val();
+            let newPass = $("#new-pass").val();
+            console.log(userInformationId);
+
+            $.put(`http://localhost:8080/api/users/${userInformationId}/updatePassword?oldPassword=${oldPass}&newPassword=${newPass}`, function(data, status) {
+                console.log(data);
+                console.log(status);
+            })
+        })
+
     })
+
+
 }
+
+
 
 
 
