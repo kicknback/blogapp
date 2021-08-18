@@ -49,10 +49,11 @@ export function searchUser() {
                 return;
             }
             userInformationId = data.id;  // if user is found, sets the user id for use in the change password listener below
+
+                        // Create the user card after click event
+            // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
             uDiv.append(`
-            
         <!-- user card powered by bbbootstrap snippets-->
-        
         <div class="page-content page-container" id="user-content">
             <div class="padding">
                 <div class="row container d-flex justify-content-center">
@@ -92,8 +93,12 @@ export function searchUser() {
                 </div>
             </div>
         </div>
-            
             `)
+            // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+
+                            // Adding posts to user card, if they exist
+            // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
             let postDiv = $("#user-posts-div");
             if (data.posts) {
                 postDiv.append(`
@@ -122,21 +127,34 @@ export function searchUser() {
                 
                 `)
             }
-        })
+            // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-        $("#pass-button").click(function() {
-            let oldPass = $("#old-pass").val();
-            let newPass = $("#new-pass").val();
-            console.log(userInformationId);
 
-            $.put(`http://localhost:8080/api/users/${userInformationId}/updatePassword?oldPassword=${oldPass}&newPassword=${newPass}`, function(data, status) {
-                console.log(data);
-                console.log(status);
+
+                                // click event to change password
+            // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+            $("#submit-new-pass").click(function() {
+                let oldPass = $("#old-pass").val();
+                let newPass = $("#new-pass").val();
+                console.log(userInformationId);
+
+                $.ajax({
+                    url: `http://localhost:8080/api/users/${userInformationId}/updatePassword?oldPassword=${oldPass}&newPassword=${newPass}`,
+                    type: "PUT",
+                    contentType: "application/json",
+                    success: function(data,status,xhr) {
+                        console.log(status);
+                        console.log(data);
+                    },
+                    error: function(jqXhr, textStatus, error) {
+                        console.log(textStatus);
+                        console.log("Error was: " + error);
+                    }
+                })
             })
+            // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
         })
-
     })
-
 
 }
 
