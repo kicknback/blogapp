@@ -1,10 +1,12 @@
 package com.codeup.blogapp.web;
 
+import com.codeup.blogapp.data.Category;
 import com.codeup.blogapp.data.Post;
 import com.codeup.blogapp.data.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,12 +17,18 @@ public class PostsController {
     private ArrayList<Post> posts;
     User testUser = new User(4L, "testy", "testy@test.com", "testytest");
 
+    Collection<Category> tags = new ArrayList<Category>(){{
+        add(new Category(1, "Java"));
+        add(new Category(2, "Javascript"));
+        add(new Category(3, "HTML"));
+    }};
+
     PostsController() {
 
         posts = new ArrayList<Post>() {{
-            add(new Post(1L, "A new post", "this is a brilliant post. 10/10", testUser));
-            add(new Post(2L, "A newer post", "this is a slightly brilliant post. 10/10", testUser));
-            add(new Post(3L, "A new post", "this is a supremely brilliant post. 10/10", testUser));
+            add(new Post(1L, "A new post", "this is a brilliant post. 10/10", testUser, tags));
+            add(new Post(2L, "A newer post", "this is a slightly brilliant post. 10/10", testUser, tags));
+            add(new Post(3L, "A new post", "this is a supremely brilliant post. 10/10", testUser, tags));
         }};
 
     }

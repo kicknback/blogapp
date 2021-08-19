@@ -2,13 +2,12 @@ import createView from "../createView.js";
 
 export default function PostIndex(props) {
     return `
-        <header>
+        <header class="mb-5">
             <h1>Posts Page</h1>
         </header>
         <main class="">
-            
+            <h3 class="my-3">Create new post</h3>
             <form>
-
                 <div class="form-group">
                     <label for="post-title">Title</label>
                     <input type="text" class="form-control" id="post-title" placeholder="'Very cool blog'...">
@@ -17,28 +16,18 @@ export default function PostIndex(props) {
                     <label for="post-content">Content</label>
                     <textarea class="form-control" id="post-content" rows="3"></textarea>
                 </div>
+                <div class="form-group">
+                    <label for="tag-box">Tags</label>
+                    <input type="text" class="form-control" id="tag-box" placeholder="Enter space-separated tags...">
+                </div>
                 <button type="submit" class="myButton" id="submit">Submit</button>
-
             </form>
             <br>
             <div>
             <hr>
             <br>  
             <h2 class="align-self-center">POSTS</h2>
-            ${props.posts.map(post =>
-                
-                `
-                <div class="card" data-id="${post.id}" >
-                    <div class="card-header d-flex justify-content-between">
-                        <p>${post.title}</p><p>by: ${post.user.username}</p>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">${post.content}</p>
-                        <button type="button" class="myButton edit" data-toggle="modal" data-target="#ModalCenter">Edit</button>
-                        <button type="button" class="myButton delete">Delete</button>
-                    </div>
-                </div>
-                `).join('')}
+            ${getPostsHtml(props.posts)}
             
                 <div class="modal fade" id="ModalCenter" data-backdrop="static" data-keyboard="false" tabindex="-1"
                  role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
@@ -74,10 +63,48 @@ export default function PostIndex(props) {
                     </div>
                 </div>
             </div>
+            <br>
+            <hr>
+            <br>
+            <h3 class="my-3">Find posts by tag name</h3>
+            <form>
+                <div class="form-group">
+                    <label for="tag-search">Enter tag</label>
+                    <input type="text" class="form-control" id="tag-search" placeholder="'Tagname'...">
+                </div>
+                <button type="submit" class="myButton" id="tag-button">Search</button>
+            </form>
             
             </div>
         </main>
     `;
+}
+
+function getPostsHtml(posts) {
+    return posts.map(post => `
+                <div class="card mb-3" data-id="${post.id}" >
+                    <div class="card-header d-flex justify-content-between">
+                        <p>${post.title}</p><p>by: ${post.user.username}</p>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">${post.content}</p>
+                        <button type="button" class="myButton edit" data-toggle="modal" data-target="#ModalCenter">Edit</button>
+                        <button type="button" class="myButton delete">Delete</button>
+                    </div>
+                    <div class="card-footer d-flex">
+<!--                        <p class="">Fun</p><p class="border-dark rounded-pill mr-2">Cool</p>-->
+                        <div class="categories">${getCategoriesComponent(post.categories)}</div>
+                    </div>
+                </div>
+                `).join('')
+
+}
+function getCategoriesComponent(categories) {
+    return categories.map(category =>
+        `
+            <span class="border-dark rounded-pill mr-2">#${category.name}</span>
+        `
+    ).join("");
 }
 
 
@@ -85,16 +112,18 @@ export default function PostIndex(props) {
 export function postListener() {
 
     $("#submit").click(function () {
-        // let pId = $("#postid").val().trim();
         let pTitle = $("#post-title").val().trim();
         let pContent = $("#post-content").val();
+        let tags = $("#tag-box").split(" ");
         let postObj = {
             title: pTitle,
             content: pContent,
             user: {
                 username: "jobo"
-            }
+            },
+            categories: tags
         };
+        console.log(postObj);
 
         fetch("http://localhost:8080/api/posts", {
             method: "POST",
