@@ -148,7 +148,7 @@ export function searchUser() {
                     },
                     error: function(jqXhr, textStatus, error) {
                         console.log(textStatus);
-                        console.log("Error was: " + error);
+                        console.log("Error was: " + error.mes);
                     }
                 })
             })
