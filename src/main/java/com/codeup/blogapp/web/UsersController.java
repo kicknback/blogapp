@@ -98,7 +98,7 @@ public class UsersController {
                     System.out.println("Password was changed...");
                 } else {
                     System.out.println("Password change denied...");
-                    throw new ConstraintViolationException("Passwords do not match", new HashSet<>());
+                   // throw new ConstraintViolationException("Passwords do not match", new HashSet<>());
                 }
             }
         }

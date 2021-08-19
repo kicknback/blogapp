@@ -13,6 +13,7 @@ public class User {
     public enum Role {USER, ADMIN}
     private Collection<Post> posts;
 
+
     public User(long id, String username, String email, String password, Collection<Post> posts) {
         this.id = id;
         this.username = username;
