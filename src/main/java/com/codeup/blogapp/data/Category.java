@@ -1,5 +1,7 @@
 package com.codeup.blogapp.data;
 
+import com.codeup.blogapp.data.posts.Post;
+
 import java.util.Collection;
 
 public class Category {
