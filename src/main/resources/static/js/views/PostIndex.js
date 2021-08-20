@@ -16,17 +16,23 @@ export default function PostIndex(props) {
                     <label for="post-content">Content</label>
                     <textarea class="form-control" id="post-content" rows="3"></textarea>
                 </div>
-                <div class="form-group">
-                    <label for="tag-box">Tags</label>
-                    <input type="text" class="form-control" id="tag-box" placeholder="Enter space-separated tags...">
+                
+                <!-- Tag selecter powered by bbbootstrap -->
+                <div class="row d-flex justify-content-center my-3">
+                    <div class="col-md-6"> 
+                        <select id="choices-multiple-remove-button" placeholder="Select related tags" multiple>
+                            ${props.categories.map(category => `<option value="${category.name}" data-id="${category.id}">${category.name}</option>`)}
+                        </select> 
+                    </div>
                 </div>
+                
                 <button type="submit" class="myButton" id="submit">Submit</button>
             </form>
             <br>
             <div>
             <hr>
             <br>  
-            <h2 class="align-self-center">POSTS</h2>
+            <h2 class="align-self-center mb-3">POSTS</h2>
             ${getPostsHtml(props.posts)}
             
                 <div class="modal fade" id="ModalCenter" data-backdrop="static" data-keyboard="false" tabindex="-1"
@@ -50,7 +56,7 @@ export default function PostIndex(props) {
                                 <div class="form-group">
                                     <label for="p-content">Post Content</label>
                                     <textarea class="form-control" id="p-content" rows="3" placeholder=""></textarea>
-                                    <!--   <small id="textHelp" class="form-text text-muted"></small>-->
+                                    <!--   <small id="textHelp" class="form-text text-muted"></small> -->
                                 </div>
 
                             </form>
@@ -92,7 +98,6 @@ function getPostsHtml(posts) {
                         <button type="button" class="myButton delete">Delete</button>
                     </div>
                     <div class="card-footer d-flex">
-<!--                        <p class="">Fun</p><p class="border-dark rounded-pill mr-2">Cool</p>-->
                         <div class="categories">${getCategoriesComponent(post.categories)}</div>
                     </div>
                 </div>
@@ -102,7 +107,7 @@ function getPostsHtml(posts) {
 function getCategoriesComponent(categories) {
     return categories.map(category =>
         `
-            <span class="border-dark rounded-pill mr-2">#${category.name}</span>
+            <span class="border border-dark rounded-pill mr-2"><span class="p-2">#${category.name}</span></span>
         `
     ).join("");
 }
@@ -110,6 +115,15 @@ function getCategoriesComponent(categories) {
 
 /*Sends the post form data to the backend postscontroller; then empties the form fields*/
 export function postListener() {
+
+    $(document).ready(function(){
+
+        var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+            removeItemButton: true
+        });
+
+
+    });
 
     $("#submit").click(function () {
         let pTitle = $("#post-title").val().trim();

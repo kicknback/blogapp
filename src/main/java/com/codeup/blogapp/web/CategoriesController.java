@@ -25,6 +25,11 @@ public class CategoriesController {
     }
 
     @GetMapping
+    private ArrayList<Category> getCategories() {
+        return categories;
+    }
+
+    @GetMapping("/associatedposts")
     private Category getPostsByCategory(@RequestParam String categoryName) {
 
         Category category = null;

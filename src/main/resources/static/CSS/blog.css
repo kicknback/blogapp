@@ -7,10 +7,9 @@ header, #login-heading, #register-heading, #user-heading{
     background-clip: border-box;
     border: 1px solid #d2d2dc;
 }
-/*.tag {*/
-/*    border: 1px solid #d2d2dc;*/
-/*    margin-right: 5px; !important;*/
-/*}*/
+.tag-button {
+    margin-bottom: 100px!important;
+}
 
 
 /*    Styling for the buttons -- created from https://www.bestcssbuttongenerator.com/    */
