@@ -1,6 +1,7 @@
 import createView from "../createView.js";
 
 export default function PostIndex(props) {
+
     return `
         <header class="mb-5">
             <h1>Posts Page</h1>
@@ -18,10 +19,11 @@ export default function PostIndex(props) {
                 </div>
                 
                 <!-- Tag selecter powered by bbbootstrap -->
-                <div class="row d-flex justify-content-center my-3">
+                <div class="row d-flex justify-content-start my-3">
                     <div class="col-md-6"> 
                         <select id="choices-multiple-remove-button" placeholder="Select related tags" multiple>
-                            ${props.categories.map(category => `<option value="${category.name}" data-id="${category.id}">${category.name}</option>`)}
+                            // ${props.categories.map(category => `<option value="${category.name}">${category.name}</option>`)}
+                            ${props.categories.forEach((category, index) => `<option data-attribute="${index}" value="${category.name}">${category.name}</option>`)}
                         </select> 
                     </div>
                 </div>
@@ -122,39 +124,44 @@ export function postListener() {
             removeItemButton: true
         });
 
-
     });
 
     $("#submit").click(function () {
         let pTitle = $("#post-title").val().trim();
         let pContent = $("#post-content").val();
-        let tags = $("#tag-box").split(" ");
-        let postObj = {
-            title: pTitle,
-            content: pContent,
-            user: {
-                username: "jobo"
-            },
-            categories: tags
-        };
-        console.log(postObj);
+        let tagArray = [];
+        $(".choices__item--selectable").each(tag => {
+            tagArray.push(tag.attr("data-value"));
+        })
 
-        fetch("http://localhost:8080/api/posts", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(postObj)
-        }).then(data => {
-            console.log(data);
-            createView("/posts");
-            pTitle = "";
-            pContent = "";
+        console.log(tagArray);
 
-        }).catch(err => {
-            console.log(`There was an API error of the following: ${err}`);
-            alert(`Sorry, there was an error adding the post ${pTitle}.  Please try again later.`)
-        });
+        // let postObj = {
+        //     title: pTitle,
+        //     content: pContent,
+        //     user: {
+        //         username: "jobo"
+        //     },
+        //     categories: tags
+        // };
+        // console.log(postObj);
+        //
+        // fetch("http://localhost:8080/api/posts", {
+        //     method: "POST",
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify(postObj)
+        // }).then(data => {
+        //     console.log(data);
+        //     createView("/posts");
+        //     pTitle = "";
+        //     pContent = "";
+        //
+        // }).catch(err => {
+        //     console.log(`There was an API error of the following: ${err}`);
+        //     alert(`Sorry, there was an error adding the post ${pTitle}.  Please try again later.`)
+        // });
 
     })
 

@@ -14,6 +14,7 @@ import java.util.*;
 public class UsersController {
 
     private ArrayList<User> users;
+
     Collection<Post> posts = new ArrayList<Post>() {{
         add(new Post(1L, "A new post", "this is a brilliant post. 10/10"));
         add(new Post(2L, "A newer post", "this is a slightly brilliant post. 10/10"));

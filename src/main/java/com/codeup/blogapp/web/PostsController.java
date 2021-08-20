@@ -15,6 +15,7 @@ import java.util.Objects;
 public class PostsController {
 
     private ArrayList<Post> posts;
+
     User testUser = new User(4L, "testy", "testy@test.com", "testytest");
 
     Collection<Category> tags = new ArrayList<Category>(){{
