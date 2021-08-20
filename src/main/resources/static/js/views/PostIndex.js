@@ -130,8 +130,8 @@ export function postListener() {
         let pTitle = $("#post-title").val().trim();
         let pContent = $("#post-content").val();
         let tagArray = [];
-        $(".choices__item--selectable").each(tag => {
-            tagArray.push(tag.attr("data-value"));
+        $(".choices__item--selectable").attr("data-value").each(tag => {
+            tagArray.push(tag);
         })
 
         console.log(tagArray);
