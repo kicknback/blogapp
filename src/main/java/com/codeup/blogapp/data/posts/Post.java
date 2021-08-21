@@ -1,6 +1,6 @@
 package com.codeup.blogapp.data.posts;
 
-import com.codeup.blogapp.data.Category;
+import com.codeup.blogapp.data.category.Category;
 import com.codeup.blogapp.data.users.User;
 
 import javax.persistence.*;
@@ -20,9 +20,16 @@ public class Post {
     @Column
     private String content;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "post_category",
+            joinColumns = {@JoinColumn(name = "post_id")},
+            inverseJoinColumns = {@JoinColumn(name = "category_id")}
+    )
     private Collection<Category> categories;
 
 
