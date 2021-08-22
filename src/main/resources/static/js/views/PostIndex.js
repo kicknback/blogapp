@@ -123,6 +123,8 @@ export function postListener() {
         var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
             removeItemButton: true
         });
+        // var url = window.location.pathname;
+        // $('.nav-link [href="${url}"]').addClass('active');
 
     });
 
