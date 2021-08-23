@@ -4,6 +4,8 @@ INSERT INTO posts (user_id, title, content) VALUES (1, 'Babys First Post', 'Do n
 
 INSERT INTO categories (name) VALUES ('test_tag');
 
+INSERT INTO categories (id, name) VALUES (2, 'Javascript'), (3, 'HTML'), (4, 'Java');
+
 INSERT INTO post_category (post_id, category_id) VALUES (1, 1);
 
 SELECT * FROM users;
