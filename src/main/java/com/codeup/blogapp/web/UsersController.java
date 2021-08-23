@@ -55,12 +55,7 @@ public class UsersController {
 
     @GetMapping("/findByUsername")
     private User findByUsername(@RequestParam String username) {
-        // for (User userItem : users) {
-        //     if (Objects.equals(userItem.getUsername().toLowerCase(), username.toLowerCase())) {
-        //         return userItem;
-        //     }
-        // }
-        return null;
+        return userRepository.findUserByUsername(username);
     }
 
     @GetMapping("/findByEmail")

@@ -28,7 +28,7 @@ public class Post {
     private User user;
 
     @ManyToMany
-    @JsonIgnore
+    // @JsonIgnore
     @JoinTable(
             name = "post_category",
             joinColumns = {@JoinColumn(name = "post_id")},

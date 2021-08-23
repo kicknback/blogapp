@@ -32,7 +32,7 @@ public class User {
 
     public enum Role {USER, ADMIN}
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     @JsonManagedReference
     private Collection<Post> posts;
 
