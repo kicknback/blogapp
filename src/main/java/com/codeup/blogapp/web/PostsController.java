@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping(value = "/api/posts", headers = "Accept=application/json")
+@RequestMapping(value = "/api/posts", headers = "Accept=application/json", produces = "application/json")
 public class PostsController {
 
     // private ArrayList<Post> posts;
@@ -22,13 +22,13 @@ public class PostsController {
         this.postsRepository = postsRepository;
     }
 
-    User testUser = new User(4L, "testy", "testy@test.com", "testytest");
-
-    Collection<Category> tags = new ArrayList<Category>(){{
-        add(new Category(1, "Java"));
-        add(new Category(2, "Javascript"));
-        add(new Category(3, "HTML"));
-    }};
+    // User testUser = new User(4L, "testy", "testy@test.com", "testytest");
+    //
+    // Collection<Category> tags = new ArrayList<Category>(){{
+    //     add(new Category(1, "Java"));
+    //     add(new Category(2, "Javascript"));
+    //     add(new Category(3, "HTML"));
+    // }};
 
     // PostsController() {
     //
@@ -45,9 +45,16 @@ public class PostsController {
         return postsRepository.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     private Post getPostById(@PathVariable Long id) {
-        return postsRepository.getById(id);
+        try {
+            return postsRepository.findById(id).get();
+
+        } catch (Exception e) {
+            // @ExceptionHandler(value = )
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 
     @PostMapping
