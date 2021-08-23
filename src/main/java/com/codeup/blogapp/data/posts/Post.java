@@ -4,6 +4,7 @@ import com.codeup.blogapp.data.category.Category;
 import com.codeup.blogapp.data.users.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -24,11 +25,10 @@ public class Post {
     private String content;
 
     @ManyToOne
-    @JsonBackReference
+    @JsonIgnoreProperties("posts")
     private User user;
 
     @ManyToMany
-    // @JsonIgnore
     @JoinTable(
             name = "post_category",
             joinColumns = {@JoinColumn(name = "post_id")},

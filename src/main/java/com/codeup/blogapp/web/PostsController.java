@@ -22,23 +22,6 @@ public class PostsController {
         this.postsRepository = postsRepository;
     }
 
-    // User testUser = new User(4L, "testy", "testy@test.com", "testytest");
-    //
-    // Collection<Category> tags = new ArrayList<Category>(){{
-    //     add(new Category(1, "Java"));
-    //     add(new Category(2, "Javascript"));
-    //     add(new Category(3, "HTML"));
-    // }};
-
-    // PostsController() {
-    //
-    //     posts = new ArrayList<Post>() {{
-    //         add(new Post(1L, "A new post", "this is a brilliant post. 10/10", testUser, tags));
-    //         add(new Post(2L, "A newer post", "this is a slightly brilliant post. 10/10", testUser, tags));
-    //         add(new Post(3L, "A new post", "this is a supremely brilliant post. 10/10", testUser, tags));
-    //     }};
-    //
-    // }
 
     @GetMapping
     private List<Post> getPosts() {
@@ -59,9 +42,6 @@ public class PostsController {
 
     @PostMapping
     private void createPost(@RequestBody Post newPost) {
-        // int id = posts.size() + 1;
-        // newPost.setId((long) id);
-        // posts.add(newPost);
         System.out.println(newPost.getTitle());
         System.out.println(newPost.getContent());
         postsRepository.save(newPost);
@@ -72,12 +52,6 @@ public class PostsController {
         System.out.println(post.getId());
         System.out.println(post.getTitle());
         System.out.println(post.getContent());
-        // for (Post postItem : posts) {
-        //     if (Objects.equals(postItem.getId(), id)) {
-        //         postItem.setTitle(post.getTitle());
-        //         postItem.setContent(post.getContent());
-        //     }
-        // }
 
         // Need to make sure post exists first
         // Post existingPost = postsRepository.getById(id);
@@ -87,7 +61,6 @@ public class PostsController {
 
     @DeleteMapping("/{id}")
     private void deletePost(@PathVariable Long id) {
-        // posts.removeIf(postItem -> Objects.equals(postItem.getId(), id));
         System.out.printf("Movie %s was deleted.", id);
         postsRepository.deleteById(id);
     }

@@ -138,32 +138,32 @@ export function postListener() {
 
         console.log(tagArray);
 
-        // let postObj = {
-        //     title: pTitle,
-        //     content: pContent,
-        //     user: {
-        //         username: "jobo"
-        //     },
-        //     categories: tags
-        // };
-        // console.log(postObj);
-        //
-        // fetch("http://localhost:8080/api/posts", {
-        //     method: "POST",
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(postObj)
-        // }).then(data => {
-        //     console.log(data);
-        //     createView("/posts");
-        //     pTitle = "";
-        //     pContent = "";
-        //
-        // }).catch(err => {
-        //     console.log(`There was an API error of the following: ${err}`);
-        //     alert(`Sorry, there was an error adding the post ${pTitle}.  Please try again later.`)
-        // });
+        let postObj = {
+            title: pTitle,
+            content: pContent,
+            user: {
+                username: "jobo"
+            },
+            categories: tags
+        };
+        console.log(postObj);
+
+        fetch("http://localhost:8080/api/posts", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(postObj)
+        }).then(data => {
+            console.log(data);
+            createView("/posts");
+            pTitle = "";
+            pContent = "";
+
+        }).catch(err => {
+            console.log(`There was an API error of the following: ${err}`);
+            alert(`Sorry, there was an error adding the post ${pTitle}.  Please try again later.`)
+        });
 
     })
 
