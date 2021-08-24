@@ -135,7 +135,7 @@ export function postListener() {
 
         const $parent = $(".choices__list, .choices__list--multiple");
         const arr = $parent.find('div')
-            .map((_, child) => child.val())
+            .map((_, child) => child.innerHTML)
             .get();
         console.log(arr);
         // $(".choices__item--selectable").each(cat => {

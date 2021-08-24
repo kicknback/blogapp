@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 import java.util.*;
 
 @RestController
-@RequestMapping(value = "/api/users", headers = "Accept=application/json", produces = "application/json")
+@RequestMapping(value = "/api/users", headers = "Accept=application/json")
 public class UsersController {
 
     private final UserRepository userRepository;
@@ -25,7 +25,7 @@ public class UsersController {
 
     @GetMapping("/{id}")
     private User findById(@PathVariable Long id) {
-        return userRepository.getById(id);
+        return userRepository.findById(id).get();
     }
 
     @GetMapping("/findByUsername")

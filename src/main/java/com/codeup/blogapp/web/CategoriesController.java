@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping(value = "/api/categories", headers = "Accept=application/json", produces = "application/json")
+@RequestMapping(value = "/api/categories", headers = "Accept=application/json")
 public class CategoriesController {
 
     private final CategoriesRepository categoriesRepository;

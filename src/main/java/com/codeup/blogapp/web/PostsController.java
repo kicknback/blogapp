@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping(value = "/api/posts", headers = "Accept=application/json", produces = "application/json")
+@RequestMapping(value = "/api/posts", headers = "Accept=application/json")
 public class PostsController {
 
     // private ArrayList<Post> posts;
