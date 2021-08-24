@@ -35,7 +35,6 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("user")
-    // @JsonManagedReference
     private Collection<Post> posts;
 
 
