@@ -2,7 +2,12 @@
 header, #login-heading, #register-heading, #user-heading{
     margin-top: 100px;
 }
-
+.p-2 {
+    background-color: #00bcd4!important;
+    border: 1px solid #00a5bb!important;
+    color: #fff!important;
+    border-radius: 500px;
+}
 .user-card {
     background-clip: border-box;
     border: 1px solid #d2d2dc;

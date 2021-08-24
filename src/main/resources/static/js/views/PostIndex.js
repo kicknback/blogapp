@@ -109,7 +109,7 @@ function getPostsHtml(posts) {
 function getCategoriesComponent(categories) {
     return categories.map(category =>
         `
-            <span class="border border-dark rounded-pill mr-2"><span class="p-2">#${category.name}</span></span>
+            <span class="mr-2"><span class="p-2">#${category.name}</span></span>
         `
     ).join("");
 }
@@ -131,39 +131,46 @@ export function postListener() {
     $("#submit").click(function () {
         let pTitle = $("#post-title").val().trim();
         let pContent = $("#post-content").val();
-        let tagArray = [];
-        $(".choices__item--selectable").attr("data-value").each(tag => {
-            tagArray.push(tag);
-        })
+        let catArray = [];
 
-        console.log(tagArray);
+        const $parent = $(".choices__list, .choices__list--multiple");
+        const arr = $parent.find('div')
+            .map((_, child) => child.val())
+            .get();
+        console.log(arr);
+        // $(".choices__item--selectable").each(cat => {
+        //     console.log(cat.attr("data-value"));
+        //     // catArray.push(cat);
+        // })
 
-        let postObj = {
-            title: pTitle,
-            content: pContent,
-            user: {
-                username: "jobo"
-            },
-            categories: tags
-        };
-        console.log(postObj);
+        console.log(catArray);
 
-        fetch("http://localhost:8080/api/posts", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(postObj)
-        }).then(data => {
-            console.log(data);
-            createView("/posts");
-            pTitle = "";
-            pContent = "";
-
-        }).catch(err => {
-            console.log(`There was an API error of the following: ${err}`);
-            alert(`Sorry, there was an error adding the post ${pTitle}.  Please try again later.`)
-        });
+        // let postObj = {
+        //     title: pTitle,
+        //     content: pContent,
+        //     user: {
+        //         username: "jobo"
+        //     },
+        //     categories: catArray
+        // };
+        // console.log(postObj);
+        //
+        // fetch("http://localhost:8080/api/posts", {
+        //     method: "POST",
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify(postObj)
+        // }).then(data => {
+        //     console.log(data);
+        //     createView("/posts");
+        //     pTitle = "";
+        //     pContent = "";
+        //
+        // }).catch(err => {
+        //     console.log(`There was an API error of the following: ${err}`);
+        //     alert(`Sorry, there was an error adding the post ${pTitle}.  Please try again later.`)
+        // });
 
     })
 
