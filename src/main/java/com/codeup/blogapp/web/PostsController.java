@@ -1,15 +1,11 @@
 package com.codeup.blogapp.web;
 
-import com.codeup.blogapp.data.category.Category;
 import com.codeup.blogapp.data.posts.Post;
 import com.codeup.blogapp.data.posts.PostsRepository;
-import com.codeup.blogapp.data.users.User;
+import com.codeup.blogapp.services.EmailService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping(value = "/api/posts", headers = "Accept=application/json")
@@ -17,10 +13,13 @@ public class PostsController {
 
     // private ArrayList<Post> posts;
     private final PostsRepository postsRepository;
+    private final EmailService emailService;
 
-    public PostsController(PostsRepository postsRepository) {
+    public PostsController(PostsRepository postsRepository, EmailService emailService) {
         this.postsRepository = postsRepository;
+        this.emailService = emailService;
     }
+
 
 
     @GetMapping
@@ -45,6 +44,7 @@ public class PostsController {
         System.out.println(newPost.getTitle());
         System.out.println(newPost.getContent());
         postsRepository.save(newPost);
+        emailService.prepareAndSend(newPost, "This is a test", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
     }
 
     @PutMapping("/{id}")
