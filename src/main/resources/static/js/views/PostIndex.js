@@ -22,8 +22,8 @@ export default function PostIndex(props) {
                 <div class="row d-flex justify-content-start my-3">
                     <div class="col-md-6"> 
                         <select id="choices-multiple-remove-button" placeholder="Select related tags" multiple>
-                            // ${props.categories.map(category => `<option value="${category.name}">${category.name}</option>`)}
-                            ${props.categories.forEach((category, index) => `<option data-attribute="${index}" value="${category.name}">${category.name}</option>`)}
+                             ${props.categories.map(category => `<option value="${category.id}">${category.name}</option>`)} 
+                           <!-- ${props.categories.forEach((category) => `<option data-attribute="${category.id}" value="${category.name}">${category.name}</option>`)}-->
                         </select> 
                     </div>
                 </div>
@@ -83,6 +83,7 @@ export default function PostIndex(props) {
                 <button type="submit" class="myButton" id="tag-button">Search</button>
             </form>
             
+            
             </div>
         </main>
     `;
@@ -92,7 +93,7 @@ function getPostsHtml(posts) {
     return posts.map(post => `
                 <div class="card mb-3" data-id="${post.id}" >
                     <div class="card-header d-flex justify-content-between">
-                        <p>${post.title}</p><p>by: ${post.user.username}</p>
+                        <p class="post-title">${post.title}</p><p class="post-user" data-id="${post.user.id}">by: ${post.user.username}</p>
                     </div>
                     <div class="card-body">
                         <p class="card-text">${post.content}</p>
@@ -133,52 +134,47 @@ export function postListener() {
         let pContent = $("#post-content").val();
         let catArray = [];
 
-        const $parent = $(".choices__list, .choices__list--multiple");
-        const arr = $parent.find('div')
-            .map((_, child) => child.innerHTML)
-            .get();
-        console.log(arr);
-        // $(".choices__item--selectable").each(cat => {
-        //     console.log(cat.attr("data-value"));
-        //     // catArray.push(cat);
-        // })
+        const $parent = $("#choices-multiple-remove-button");
+        let catIds = $parent.children('option').map(function() {
+            return { id: parseInt($(this).val())};
+        })
+        console.log(catIds);
 
-        console.log(catArray);
+        let postObj = {
+            title: pTitle,
+            content: pContent,
+            user: {
+                id: 4
+            },
+            categories: $.makeArray(catIds)
+        };
+        console.log(postObj);
 
-        // let postObj = {
-        //     title: pTitle,
-        //     content: pContent,
-        //     user: {
-        //         username: "jobo"
-        //     },
-        //     categories: catArray
-        // };
-        // console.log(postObj);
-        //
-        // fetch("http://localhost:8080/api/posts", {
-        //     method: "POST",
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(postObj)
-        // }).then(data => {
-        //     console.log(data);
-        //     createView("/posts");
-        //     pTitle = "";
-        //     pContent = "";
-        //
-        // }).catch(err => {
-        //     console.log(`There was an API error of the following: ${err}`);
-        //     alert(`Sorry, there was an error adding the post ${pTitle}.  Please try again later.`)
-        // });
+        fetch("http://localhost:8080/api/posts", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(postObj)
+        }).then(data => {
+            console.log(data);
+            createView("/posts");
+            pTitle = "";
+            pContent = "";
+
+        }).catch(err => {
+            console.log(`There was an API error of the following: ${err}`);
+            alert(`Sorry, there was an error adding the post ${pTitle}.  Please try again later.`)
+        });
 
     })
 
     $(".edit").click(function () {
         console.log("Edit event fired..");
         let postId = $(this).parent().parent().attr("data-id");
-        let postTitle = $(this).parent().siblings(".card-header").text().trim();
+        let postTitle = $(this).parent().siblings(".card-header").children(".post-title").text().trim();
         let postContent = $(this).parent().children(".card-text").text().trim();
+        let userId = parseInt($(this).parent().siblings(".card-header").children(".post-user").attr("data-id"));
         let modalTitle = $("#p-title");
         let modalContent = $("#p-content");
         modalTitle.val(postTitle);
@@ -188,7 +184,10 @@ export function postListener() {
             let putObj = {
                 id: postId,
                 title: modalTitle.val(),
-                content: modalContent.val()
+                content: modalContent.val(),
+                user: {
+                    id: userId
+                }
             }
             putObj = JSON.stringify(putObj);
 

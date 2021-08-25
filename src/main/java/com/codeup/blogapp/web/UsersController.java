@@ -35,7 +35,7 @@ public class UsersController {
 
     @GetMapping("/findByEmail")
     private User findByEmail(@RequestParam String email) {
-        return null;
+        return userRepository.findByEmail(email);
     }
 
     @PostMapping

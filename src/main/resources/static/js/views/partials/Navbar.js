@@ -1,7 +1,7 @@
 export default function Navbar(props) {
     return `
         <nav class="container-fluid navbar navbar-expand-lg fixed-top navbar-light bg-light">
-            <a class="navbar-brand" href="#">Blog App</a>
+            <a class="navbar-brand">Blog App</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

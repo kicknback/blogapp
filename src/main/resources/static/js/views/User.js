@@ -81,6 +81,7 @@ export function searchUser() {
                                             <h6>EMAIL</h6>
                                             <p>${data.email}</p>
                                         </div>
+                                        <hr>
                                         <div class="mb-3">
                                             <h6>POSTS</h6>
                                         </div>
@@ -100,7 +101,7 @@ export function searchUser() {
                             // Adding posts to user card, if they exist
             // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
             let postDiv = $("#user-posts-div");
-            if (data.posts) {
+            if (data.posts.length !== 0) {
                 postDiv.append(`
                     
                     ${data.posts.map(post =>
@@ -122,7 +123,7 @@ export function searchUser() {
                 postDiv.append(`
                 
                     <div class="mt-2">
-                        <p>NO POSTS FOUND</p>
+                        <p>-- NO POSTS FOUND --</p>
                     </div>
                 
                 `)

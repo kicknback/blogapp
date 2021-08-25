@@ -26,7 +26,7 @@ public class Post {
     private User user;
 
     @ManyToMany(
-            cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH},
+            cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},
             targetEntity = Category.class
     )
     @JoinTable(
