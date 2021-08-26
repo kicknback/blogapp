@@ -112,8 +112,8 @@ export function searchUser() {
                     </div>
                     <div class="card-body">
                         <p class="card-text">${post.content}</p>
-                        <button type="button" class="myButton edit" data-toggle="modal" data-target="#ModalCenter">Edit</button>
-                        <button type="button" class="myButton delete">Delete</button>
+                    <!-- <button type="button" class="myButton edit" data-toggle="modal" data-target="#ModalCenter">Edit</button>-->
+                    <!-- <button type="button" class="myButton delete">Delete</button>-->
                     </div>
                 </div>
             `).join('')}

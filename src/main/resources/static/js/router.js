@@ -8,6 +8,7 @@ import LoginEvent from "./auth.js";
 import {postListener} from "./views/PostIndex.js";
 import Register, {registerListener} from "./views/Register.js";
 import User, {searchUser} from "./views/User.js";
+import {navListener} from "./views/partials/Navbar.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -21,6 +22,7 @@ export default function router(URI) {
             state: {},
             uri: '/',
             title: 'Home',
+            viewEvent: navListener
         },
         '/login': {
             returnView: Login,

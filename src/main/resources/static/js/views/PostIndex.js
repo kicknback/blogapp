@@ -21,7 +21,7 @@ export default function PostIndex(props) {
                 <!-- Tag selecter powered by bbbootstrap -->
                 <div class="row d-flex justify-content-start my-3">
                     <div class="col-md-6"> 
-                        <select id="choices-multiple-remove-button" placeholder="Select related tags" multiple>
+                        <select id="choices-multiple-remove-button" placeholder="Select related tags (optional)" multiple>
                              ${props.categories.map(category => `<option value="${category.id}">${category.name}</option>`)} 
                            <!-- ${props.categories.forEach((category) => `<option data-attribute="${category.id}" value="${category.name}">${category.name}</option>`)}-->
                         </select> 
@@ -71,9 +71,9 @@ export default function PostIndex(props) {
                     </div>
                 </div>
             </div>
-            <br>
+            <br><!--
             <hr>
-            <br>
+            <br> 
             <h3 class="my-3">Find posts by tag name</h3>
             <form>
                 <div class="form-group">
@@ -81,7 +81,7 @@ export default function PostIndex(props) {
                     <input type="text" class="form-control" id="tag-search" placeholder="'Tagname'...">
                 </div>
                 <button type="submit" class="myButton" id="tag-button">Search</button>
-            </form>
+            </form> -->
             
             
             </div>
@@ -121,6 +121,7 @@ export function postListener() {
 
     $(document).ready(function(){
 
+        // For dynamic usage of the tag selector when creating a new post
         var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
             removeItemButton: true
         });
@@ -129,16 +130,22 @@ export function postListener() {
 
     });
 
+    // Post creation listener to build new post based on input fields
     $("#submit").click(function () {
         let pTitle = $("#post-title").val().trim();
         let pContent = $("#post-content").val();
+
+        if (pTitle === "" || pContent === "") {
+            alert("Title or content fields cannot be empty.");
+            return;
+        }
+
         let catArray = [];
 
         const $parent = $("#choices-multiple-remove-button");
         let catIds = $parent.children('option').map(function() {
             return { id: parseInt($(this).val())};
         })
-        console.log(catIds);
 
         let postObj = {
             title: pTitle,
@@ -169,6 +176,7 @@ export function postListener() {
 
     })
 
+    // Click listener to edit the selected post
     $(".edit").click(function () {
         console.log("Edit event fired..");
         let postId = $(this).parent().parent().attr("data-id");
@@ -209,6 +217,7 @@ export function postListener() {
         })
     })
 
+    //  Listener on post delete buttons to remove the selected post
     $(".delete").click(function () {
         let postId = $(this).parent().parent().attr("data-id");
         let idObj = {

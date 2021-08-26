@@ -18,3 +18,19 @@ export default function Navbar(props) {
         </nav>
     `;
 }
+
+export function navListener() {
+
+    $(document).ready(function() {
+
+        // var url = window.location.pathname;
+        // $('.nav-link [href="${url}"]').addClass('active');
+
+        $(".navbar-nav a").click(function() {
+            $(".navbar-nav a").removeClass("active");
+            $(this).addClass("active");
+        })
+
+    })
+
+}
