@@ -8,7 +8,7 @@ import createView from "./createView.js";
 export default function addLoginEvent() {
     document.querySelector("#login-btn").addEventListener("click", function () {
         let obj = {
-            username: document.querySelector("#username").value,
+            username: document.querySelector("#email").value,
             password: document.querySelector("#password").value,
             grant_type: 'password'
         }
@@ -38,7 +38,7 @@ export default function addLoginEvent() {
  * This function should be used only after the user is logged in
  * @returns {boolean|{headers: {Authorization: string}}}
  */
-export function getAuthBearerTokenHeader() {
+export function getHeaders() {
     const token = localStorage.getItem("access_token");
     return token
         ? {

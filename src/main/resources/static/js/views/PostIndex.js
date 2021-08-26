@@ -1,4 +1,5 @@
 import createView from "../createView.js";
+import {getHeaders} from "../auth.js";
 
 export default function PostIndex(props) {
 
@@ -125,6 +126,8 @@ export function postListener() {
         var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
             removeItemButton: true
         });
+
+
         // var url = window.location.pathname;
         // $('.nav-link [href="${url}"]').addClass('active');
 
@@ -159,9 +162,7 @@ export function postListener() {
 
         fetch("http://localhost:8080/api/posts", {
             method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: getHeaders(),
             body: JSON.stringify(postObj)
         }).then(data => {
             console.log(data);
@@ -202,7 +203,7 @@ export function postListener() {
             $.ajax({
                 url: `http://localhost:8080/api/posts/${postId}`,
                 type: "PUT",
-                contentType: "application/json",
+                contentType: getHeaders(),
                 data: putObj,
                 success: function (result) {
                     console.log(result);
@@ -228,7 +229,7 @@ export function postListener() {
         $.ajax({
             url: `http://localhost:8080/api/posts/${postId}`,
             type: "DELETE",
-            contentType: "application/json",
+            contentType: getHeaders(),
             data: idObj,
             success: function (result) {
                 console.log(result);

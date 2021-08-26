@@ -9,8 +9,8 @@ export default function Login(props) {
         <h1 id="login-heading">Log In</h1>
     
         <form id="login-form">
-            <label for="username">Username</label>
-            <input id="username" name="username" type="text"/>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="text"/>
             <label for="password">Password</label>
             <input id="password" name="password" type="password"/>
             <input id="login-btn"  class="myButton" type="submit" value="Log In"/>

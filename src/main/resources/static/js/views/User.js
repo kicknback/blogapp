@@ -1,4 +1,5 @@
 import createView from "../createView.js";
+import {getHeaders} from "../auth.js";
 
 
 export default function User(props) {
@@ -142,7 +143,7 @@ export function searchUser() {
                 $.ajax({
                     url: `http://localhost:8080/api/users/${userInformationId}/updatePassword?oldPassword=${oldPass}&newPassword=${newPass}`,
                     type: "PUT",
-                    contentType: "application/json",
+                    contentType: getHeaders(),
                     success: function(data,status,xhr) {
                         console.log(status);
                         console.log(data);

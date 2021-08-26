@@ -1,9 +1,6 @@
 package com.codeup.blogapp.data.category;
 
 import com.codeup.blogapp.data.posts.Post;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Collection;
