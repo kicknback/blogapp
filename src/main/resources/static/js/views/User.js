@@ -74,6 +74,10 @@ export function searchUser() {
                                         <label for="new-pass">New password</label>
                                         <input type="password" class="form-control" id="new-pass">
                                     </div>
+                                    <div class="form-group">
+                                        <label for="con-pass">Confirm password</label>
+                                        <input type="password" class="form-control" id="con-pass">
+                                    </div>
                                     <button type="submit" class="myButton mb-2" id="submit-new-pass">Change</button>
                                 </form>
                                 <div class="border-top pt-3 mt-1">
@@ -138,6 +142,15 @@ export function searchUser() {
             $("#submit-new-pass").click(function() {
                 let oldPass = $("#old-pass").val();
                 let newPass = $("#new-pass").val();
+                let conPass = $("#con-pass").val();
+
+                if (newPass !== conPass) {
+                    alert("Passwords do not match.  Please try again.");
+                    $("#old-pass").val("");
+                    $("#new-pass").val("");
+                    $("#con-pass").val("");
+                    return;
+                }
                 console.log(userInformationId);
 
                 $.ajax({
