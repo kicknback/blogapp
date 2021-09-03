@@ -24,6 +24,10 @@ export default function Register(props) {
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" placeholder="Enter robust password">
                 </div>
+                 <div class="form-group">
+                    <label for="con-password">Confirm Password</label>
+                    <input type="password" class="form-control" id="con-password" placeholder="Re-enter password">
+                </div>
                 <button type="submit" class="myButton" id="submit-user">Submit</button>
 
         </form>
@@ -36,10 +40,16 @@ export function registerListener() {
         let username = $("#username").val();
         let email = $("#email").val();
         let pass = $("#password").val();
+        let conPass = $("#con-password").val();
 
-        console.log(username);
-        console.log(email);
-        console.log(pass);
+        if (conPass !== pass) {
+            alert("Passwords do not match.  Please try re-typing them.");
+            $("#password").val("");
+            $("#con-password").val("");
+            return;
+        }
+
+        console.log(`User ${username} was successfully created...`);
 
         let userObj = {
             username: username,
